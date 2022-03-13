@@ -1,0 +1,38 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+ <a class="navbar-brand" href="/">Musikaly</a>
+ <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+   <span class="navbar-toggler-icon"></span>
+ </button>
+ <div class="collapse navbar-collapse" id="navbarText">
+   <ul class="navbar-nav mr-auto">
+     <li class="nav-item">
+       <a class="nav-link" href="">Home</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link" href=" ">Recommend</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link" href=" ">Settings</a>
+     </li>
+   </ul>
+     {% if user.is_authenticated %}
+    <a class="btn btn-sm btn-primary m-1" href="/logout">Logout</a>
+   {% else %}
+    <a class="btn btn-sm btn-primary m-2" href="/login">Login</a>
+    <a class="btn btn-sm btn-primary m-2"  href="/register">Register</a>
+   {% endif %}
+ </div>
+</nav>
+
+<div>
+      <form class="form-inline ny-2 ny-lg-0">
+        <input class="form-control nr-sn-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success ny-2 ny-sn-0" type ="submit">Search</button>
+      </form>
+    </div>
+    {% load static %}
+    <body id="bg" style="background-image: url('{% static "Images/music1.jpg" %}')";>
+</div>
