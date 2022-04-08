@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -22,7 +24,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%i*u+@r+-mt4u=+nojt%5^fojasdn(lv^fg)e&5b47ue45jtge'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
+
+YOUTUBE_KEY = str(os.getenv('YOUTUBE_KEY'))
+
+CLIENT_KEY = str(os.getenv('CLIENT_KEY'))
+
+CLIENT_SECRET = str(os.getenv('CLIENT_SECRET'))
+
+OAUTH_KEY = str(os.getenv('OAUTH_KEY'))
+
+NAME = str(os.getenv('NAME'))
+
+USER = str(os.getenv('USER'))
+
+PASSWORD = str(os.getenv('PASSWORD'))
+
+HOST = str(os.getenv('HOST'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,7 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'users.apps.UsersConfig',
+    'users',
+    'songs',
 ]
 
 MIDDLEWARE = [
@@ -78,13 +97,23 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.sqlite3',
+   #     'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': str(os.getenv('NAME')),
+        'USER': str(os.getenv('USER')),
+        'PASSWORD': str(os.getenv('PASSWORD')),
+        'HOST': str(os.getenv('HOST')),
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -149,3 +178,5 @@ AWS_ACCESS_KEY_ID = 'AKIAVINMPP5MI5HB6AZY'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_SES_REGION_NAME = 'eu-west-1 '
 AWS_SES_REGION_ENDPOINT ='email.eu-west-1 .amazonaws.com'
+
+#WSGI_APPLICATION = 'djangoProject.wsgi.application'

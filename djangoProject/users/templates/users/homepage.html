@@ -1,12 +1,80 @@
 {% extends 'users/header.html' %}
 
+  {% block content %}
+
+  {% load static %}
+
+<!DOCTYPE html>
 <html>
-  <body>
-    <div>
-      <form class="form-inline ny-2 ny-lg-0">
-        <input class="form-control nr-sn-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success ny-2 ny-sn-0" type ="submit">Search</button>
-      </form>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+<body id="bg" style="background-image: url('{% static "Images/home.jpg" %}')";>
+
+    <style>
+	h1{
+			font-size: 50px;
+			color: red;
+		}
+    </style>
+
+{% if user.is_authenticated %}
+<div class="container mt-4">
+    <h1 class="text-center">Welcome to the homepage {{user.username}}</h1>
+    <div class="container mt-5">
+        <div class="card-deck">
+            <div class="card text-white bg-dark mb-3">
+                <img src="../static/Images/music2.jpg" class="img-fluid" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">My recommendations</h5>
+                    <p class="card-text">Find new and amazing songs here based on the songs you enjoy the most.</p>
+                </div>
+            <div class="card-footer">
+                <a href="/recommendations" class="btn btn-primary">My recommendations</a>
+            </div>
+        </div>
+        <div class="card text-white bg-dark mb-3">
+            <img src="../static/Images/music4.jpg" class="img-fluid" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">My reviews</h5>
+                <p class="card-text">Check out the songs you have previously reviewed here.</p>
+            </div>
+                <div class="card-footer">
+                    <a href="/reviews" class="btn btn-primary">My reviews</a>
+                </div>
+            </div>
+
+        <div class="card text-white bg-dark mb-3">
+            <img src="../static/Images/music1.jpg" class="img-fluid" alt="...">
+             <div class="card-body">
+                <h5 class="card-title">Latest releases</h5>
+                <p class="card-text">Find the latest tracks and album releases from artists around the globe.</p>
+             </div>
+            <div class="card-footer">
+                <a href="/new_releases" class="btn btn-primary">Latest releases</a>
+            </div>
+        </div>
     </div>
-  </body>
+</div>
+</div>
+</div>
+</head>
+{% else %}
+
+<div class="container mt-4">
+<h1 class="text-center">Welcome to the homepage {{user.username}}</h1>
+    <p>To get started please click the login button or the register<br> button if you don't have an account yet</p>
+    <div class="d-flex justify-content-center mt-3 login_container">
+				 				<a class="btn btn-sm btn-primary m-3" href="/login">Login</a>
+    <a class="btn btn-sm btn-primary m-3"  href="/register">Register</a>
+				   			</div>
+</div>
+
+{% endif %}
 </html>
+
+{% endblock %}f

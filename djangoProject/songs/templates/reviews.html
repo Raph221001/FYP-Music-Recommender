@@ -1,0 +1,93 @@
+{% extends 'users/header.html' %}
+
+  {% block content %}
+
+  {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+	<body id="bg" style="background-image: url('{% static "Images/musik.jpg" %}')";>
+<style>
+	p{
+		font-size: 18px;
+		color: black;
+	}
+	</style>
+    <title>My Reviews</title>
+</head>
+<body>
+<div class="container mt-3"></div>
+	<h2 class="text-center"><font color="white">Song Reviews</h2></font>
+	</p></p>
+	{% if songReview_pg == 'nope' %}
+	<p class="text-center">No song reviews yet.</p>
+	{% else %}
+	{% for m in songReview_pg %}
+	<div class="container-fluid">
+				<div class="media">
+	<div class="media-right">
+						<a href="/song/{{m.songId}}">
+							<img src="{{m.image}}" class="rounded" width=150>
+							<p></p>
+						</a>
+					</div>
+<div class="media-body">
+<div class="col col-md-auto">
+	<h5 class= "media-heading"><a href="/song/{{m.songId}}" style="color: black">{{m.songTitle}}</a></h5></p></p></p></p>
+	<p class="text-info">Album: <a href="/album/{{m.albumId}}" style="color: black">{{m.albumTitle}}</a>
+	<p class="text-info">Artist(s): {{m.songArtists}}</p>
+	<p class="text-info">Review: {{m.comment}}</p>
+	<p class="text-info">Rating: {{m.rating}}/10.0</p>
+</div></div></div></div>
+	{% endfor %}
+	{% endif %}
+	<h2 class="text-center"><font color="white">Album Reviews</h2></font>
+	</p></p>
+	{% if albumReview_pg == 'nope' %}
+	<p class="text-center">No album reviews yet.</p>
+	{% else %}
+	{% for a in albumReview_pg %}
+	<div class="container-fluid">
+				<div class="media">
+	<div class="media-left">
+						<a href="/album/{{m.albumId}}" style="color: black">
+	<img src="{{a.image}}" class="rounded" width=200/>
+	<p></p>
+						</a>
+					</div>
+	<div class="media-body">
+<div class="col col-md-auto">
+	<h5 class="media-heading"><a href="/album/{{a.albumId}}" style="color: black">{{a.albumTitle}}</a></h5></p></p></p></p>
+	<p class="text-info" style="color: black">Artist(s): {{a.albumArtists}}</p>
+	<p class="text-info">Review: {{a.comment}}</p>
+	<p class="text-info">Rating: {{a.rating}}/10.0</p>
+</div></div></div></div>
+	{% endfor %}
+	{% endif %}
+	<h2 class="text-center"><font color="white">Artist Reviews</h2></font>
+	</p></p>
+	{% if artistReview_pg == 'nope' %}
+	<p class="text-center">No artist reviews yet.</p>
+	{% else %}
+	{% for al in artistReview_pg %}
+	<div class="container-fluid">
+				<div class="media">
+	<div class="media-left">
+						<a href="/artist/{{al.artistId}}" style="color: black">
+	<img src="{{al.image}}" class="rounded" width=200/>
+	<p></p>
+						</a>
+					</div>
+					<div class="media-body">
+<div class="col col-md-auto">
+	<h5 class="text-info"><a href="/artist/{{al.artistId}}" style="color: black">{{al.artistName}}</a></h5></p></p></p></p>
+	<p class="text-info">Review: {{al.comment}}</p>
+	<p class="text-info">Rating: {{al.rating}}/10.0</p>
+</div></div></div></div>
+	{% endfor %}
+	{% endif %}
+	</body>
+</html>
+
+{% endblock %}

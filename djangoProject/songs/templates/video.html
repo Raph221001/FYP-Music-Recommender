@@ -1,0 +1,90 @@
+{% extends 'users/header.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+    <body id="bg" style="background-image: url('{% static "Images/video.jpg" %}')";>
+
+    <title>Search YouTube</title>
+
+    <!-- Custom styles for this template -->
+  <style>
+            .jumbotron-heading{
+              color: #FF0011;
+            }
+
+            .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+  </style>
+  </head>
+  <body>
+
+<main role="main">
+
+  <section class="wrapper1">
+  <section class="text-center">
+    <div class="container mt-5">
+      <h1 class="jumbotron-heading">Search for Videos and Lyrics</h1>
+      <p class="lead text-muted">Find the top 3 results on YouTube!</p>
+      <form method="POST">
+        <form class="form1">
+     <div class="input-group mb-3">
+          {% csrf_token %}
+          <input type="text" name="search" class="form-control" width="10px" aria-label="Username">
+      </div>
+      <p>
+        <button type="submit" name="submit" value="search" class="btn btn-primary my-2">Search</button>
+      </p>
+          </form>
+        </form>
+    </div>
+  </section>
+    </section>
+
+    <div class="container">
+      <div class="row">
+        {% for video in videos %}
+        <div class="col-lg-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ video.thumbnail }}" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"></img>
+            <div class="card-body">
+              <p class="card-text">{{ video.title }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a type="button" href="{{ video.url }}" class="btn btn-sm btn-outline-secondary">Watch</a>
+                </div>
+                <small class="text-muted">{{ video.duration }} mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</main>
+</body>
+</html>
+{% endblock %}

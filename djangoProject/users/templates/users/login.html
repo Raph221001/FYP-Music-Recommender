@@ -1,19 +1,151 @@
 {% extends "users/header.html" %}
 
-{% block content %}      
+{% block content %}
 
-{% load crispy_forms_tags %}
+<!--Login-->
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+    <body id="bg" style="background-image: url('{% static "Images/home.jpg" %}')";>
+<!DOCTYPE html>
+<html>
 
-<!--Login--> 
-<div class="container py-5">
-  <h1>Login</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ login_form|crispy }}
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
-  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
-  <a href="/password_reset">Forgot password?</a>
+<head>
+	<title>Login</title>
+
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
+		.user_card {
+            width: 550px;
+            height: 550px;
+            margin-top: auto;
+            margin-bottom: auto;
+            background: #74cfbf;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 5px;
+
+        }
+
+		h1{
+			font-size: 50px;
+			color: #ffffff;
+		}
+		p{
+			margin: 20px auto;
+			font-weight: 100;
+			line-height: 25px;
+			color: #ffffff;
+			text-align: center;
+			font-size: 18px;
+		}
+		.form_container {
+			margin-top: 40px;
+		}
+
+		#form-title{
+			color: #fff;
+            margin-top: auto;
+		}
+
+		.login_btn {
+			width: 100%;
+			background: #33ccff !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #f7ba5b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+
+		#messages{
+			background-color: grey;
+			color: #fff;
+			padding: 10px;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+  <div class="container mt-4">
+<h1 class="text-center">Hello and welcome to my website</h1>
+<p>Enter your username and password or if this is your first time here click the register button or sign up link to get started!</p>
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+
+
+					<h2 id="form-title">LOGIN</h2>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form method="POST" action="" onsubmit="return confirm ('Are you sure?')">
+						{% csrf_token %}
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+
+							<input type="text" name="username" placeholder="Username..." class="form-control">
+						</div>
+
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+
+								<input type="password" name="password" placeholder="Password..." class="form-control" >
+						</div>
+
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 				<input class="btn btn-primary" type="submit"  value="Login"/></p></p>
+								<input class="btn btn-primary" type="reset" value="Reset">
+				   			</div>
+					</form>
+
+				</div>
+
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
+
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links">
+						Don't have an account? <a href="/register" class="ml-2">Sign Up</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+</body>
+
+</html>
+
 
 {% endblock %}

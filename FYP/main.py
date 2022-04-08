@@ -1,5 +1,6 @@
 import numpy as np
 import pandas
+import spotipy
 
 #Creates a popularity recommender class
 class popular_recommender():

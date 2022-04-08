@@ -1,0 +1,195 @@
+{% extends 'users/header.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+		<body id="bg" style="background-image: url('{% static "Images/song2.jpg" %}')";>
+		<style>
+			img {
+			max-width:100%;
+			}
+			h5 {
+			color:white;
+			}
+			input.btn{
+			background-color:#66cc00;
+			}
+			.container h-100{
+				position: absolute;
+  				left: 150px;
+			}
+			section{
+				right: 300px;
+			}
+			p{
+				font-size: 18px;
+			}
+		.user_card {
+            width: 550px;
+            height: 550px;
+            margin-top: auto;
+            margin-bottom: auto;
+            background: #74cfbf;
+            position: relative;
+			right: 100px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 5px;
+
+        }
+
+		h1{
+			font-size: 50px;
+			color: #ffffff;
+		}
+		.form_container {
+			margin-top: 40px;
+		}
+
+		#form-title{
+			color: #fff;
+            margin-top: auto;
+		}
+
+		.login_btn {
+			width: 100%;
+			background: #33ccff !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #f7ba5b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		</style>
+		<title>{{song_pg.title}}</title>
+	</head>
+	<body>
+	<section>
+		<div class="container mt-5"></div>
+		<div class="container-fluid">
+			<div class="media">
+				<div class="media-left">
+					<a href="#">
+						<img src="{{song_pg.image}}" width = 300/>
+						<p></p>
+					</a>
+				</div>
+				<div class="media-body">
+					<div class="col col-md-auto">
+						<h1 class="jumbotron-heading">{{song_pg.title}}</h1>
+						<h4>Type: {{song_pg.theType}}</h4>
+						<p></p>
+						<h5>Artist(s): </h5>
+						{% for a in artist_pg %}
+						<p><a href="/artist/{{a.artistId}}" style="color: red">{{a.name}}</a></p>
+						<img src="{{a.image}}" class="rounded1" width=150/>
+						{% endfor %}
+						<p></p>
+						<h5>Album: </h5>
+						<p><a href="/album/{{album_pg.albumId}}" style="color: red">{{album_pg.title}}</a></p>
+						<h5>Release Date: </h5>
+						<p>{{album_pg.releaseDate}} </p>
+						<h5>Popularity Score: </h5>
+						<p>{{song_pg.popularity}}/100.0</p>
+						{% if song_pg.preview %}
+						<h5>Preview: </h5>
+						<audio controls>
+							<source src="{{song_pg.preview}}.mp3" type="audio/mp3" autoplay="False">
+						</audio>
+						{% endif %}
+						<h5>Streaming: </h5>
+						<p>In order to access the song on Spotify, <a href="https://www.spotify.com/us/signup/" target="_blank"><br>
+							create a Spotify account</a> or <a href="https://accounts.spotify.com/en-US/login?continue=https:%2F%2Fwww.spotify.com%2Fus%2Faccount%2Foverview%2F" target="_blank">log in to your Spotify</a><br>
+							if you have not done so already.</p>
+						<iframe src="https://open.spotify.com/embed/track/{{song_pg.songId}}" width="300" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+						<!--<iframe src="https://open.spotify.com/embed?uri=spotify:track:{{song_pg.songId}}" frameborder="0" width="300" height="100" allowtransparency="true"></iframe>-->
+						<p><a href="{{song_pg.external}} " target="_blank" style="color: red">Open on Spotify browser</a></p>
+						<p><a href="{{song_pg.uri}}" target="_blank" style="color: red">Open on Spotify</a></p>
+						<h5>Current rating: </h5>
+						{% if average.rating__avg == 'None' %}
+						<p>No average ratings yet</p>
+						{% else %}
+						<p>{{average.rating__avg}}/10.0</p>
+						{% endif %}
+						{% if theUser.is_authenticated %}
+						<section>
+								<div class="container h-100">
+
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+
+
+					<h2 id="form-title">Write a review, here {{theUser.username}}</h2>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form name="some" method = "GET" action="/song/{{song_pg.songId}}">
+
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+
+								<input type="text" name="number" value="Rate song from 0-10" class="form-control" >
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+
+							<textarea name="review" rows="5" cols="30" maxlength="100" class="form-control">What did you think of the song?</textarea>
+						</div>
+
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 				<input class="btn btn-primary" type="submit"value="submit" name = "reviewed">
+								<input class="btn btn-primary" type="reset" value="reset">
+				   			</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+							{% endif %}
+							</p></p></p></p>
+							<h5>Reviews: </h5>
+							{% if allReviews == 'nope' %}
+							<p>No reviews yet.</p>
+							{% else %}
+							{% for a in allReviews %}
+							<p>{{a.time}} (GMT)</p>
+							<p>{{a.user}}: {{a.comment}}</p>
+							<p>Rating: {{a.rating}}/10</p>
+							{% endfor %}
+							{% endif %}
+						</section>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+{% endblock %}

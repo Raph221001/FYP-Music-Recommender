@@ -1,0 +1,53 @@
+{% extends 'users/header.html' %}
+
+  {% block content %}
+
+  {% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+	<body id="bg" style="background-image: url('{% static "Images/video2.jpg" %}')";>
+
+			<style>
+			h2 {
+			color:white;
+			}
+			h1 {
+				color: red;
+			}
+			p{
+				font-size: 22px;
+			}
+		</style>
+	<title>New Releases</title>
+</head>
+<body>
+<div class="container mt-5">
+	<h2 class="text-center">Latest Song and Album Releases</h2>
+	</div>
+	{% for n in newAlbums %}
+	</p></p></p></p>
+	<div class="container-fluid">
+				<div class="media">
+	<div class="media-left">
+						<a href="#">
+							<img src="{{n.image}}" class="rounded" width=100>
+							<p></p>
+						</a>
+					</div>
+					<div class="media-body">
+<div class="col col-md-auto">
+	<h5 class= "media-heading"><a href="/album/{{n.albumId}}" style="color: red">{{n.title}}</a></h5>
+	<p class="text-info">Artist(s): {{n.artists}}</p>
+	<p class="text-info">Release Date: {{n.releaseDate}}</p>
+	<p class="text-info">Type: {{n.theType}}</p>
+</div></div></div></div>
+	{% endfor %}
+	</body>
+	
+</html>
+{% endblock %}

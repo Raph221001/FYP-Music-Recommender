@@ -1,0 +1,114 @@
+{% extends 'users/header.html' %}
+
+  {% block content %}
+
+  {% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/music.css' %}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<body id="bg" style="background-image: url('{% static "Images/music5.png" %}')";>
+	<style>
+	input.btn{
+		background-color:#66cc00;
+	}
+	p{
+		color: white;
+	}
+</style>
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+	<title>Search</title>
+
+</head>
+<body>
+	<div class="wrapper">
+		<form name="some" method = "GET" action="/search">
+			<p>Enter a song, album, or artist to search for below: </p>
+			<input class="form-control" type="text" name="q" value="{{ request.GET.q }}">
+			<input type="submit" value="Song" data-toggle="button" aria-pressed="false" autocomplete="off" class="btn btn-dark" name = "r">
+			<input class="btn btn-dark" data-toggle="button" type="submit" aria-pressed="false" autocomplete="off" value="Album" name="p">
+			<input class="btn btn-dark" data-toggle="button" type="submit" aria-pressed="false" autocomplete="off" value="Artist" name="n">
+		{% if search == True %}
+		<input class = "btn btn-dark" type="submit" value="Search again" data-toggle="button" aria-pressed="false" autocomplete="off" action="/search">
+		{% endif %}
+		</form>
+	</div>
+{% if musicData == "there is an error" %}
+{% if 'r' in request.GET %}
+<h3>No song results to display for "{{request.GET.q}}"</h3>
+
+{% elif 'p' in request.GET %}
+<h3>No album results to display for "{{request.GET.q}}"</h3>
+{% elif 'n' in request.GET %}
+<h3>No artist results to display for "{{request.GET.q}}"</h3>
+{% endif %}
+{% elif musicData == "there is a song error" %}
+			<h3>No song results to display for "{{request.GET.q}}"</h3>
+{% elif musicData == "there is a album error" %}
+		<h3>No album results to display for "{{request.GET.q}}"</h3>
+{% elif musicData == "there is a artist error" %}
+<h3>No artist results to display for "{{request.GET.q}}"</h3>
+{% else %}
+	{% for m in musicData %}
+	{% if 'r' in request.GET %}
+</nav>
+	<div class="container-fluid">
+				<div class="media">
+					<div class="media-left">
+						<a href="#">
+	<img src="{{m.image}}" class="rounded1" width=100/>
+	<p></p>
+						</a>
+					</div>
+					<div class="media-body">
+						<div class="col col-md-auto">
+	<h3><a href="/song/{{m.songId}}" name = "clicked">{{m.title}}</a></h3>
+	<p>{{m.artists}}</p>
+	</div>
+					</div>
+				</div>
+			</div>
+	{% elif 'p' in request.GET %}
+	<div class="container-fluid">
+				<div class="media">
+					<div class="media-left">
+						<a href="#">
+	<img src="{{m.image}}" class="rounded1" width=100/>
+	<p></p>
+						</a>
+					</div>
+					<div class="media-body">
+						<div class="col col-md-auto"> 
+	<h3><a href="/album/{{m.albumId}}" name = "clicked">{{m.title}}</a></h3>
+	<p>{{m.artists}}</p>
+	</div>
+					</div>
+				</div>
+			</div>
+	{% elif 'n' in request.GET %}
+	<div class="container-fluid">
+				<div class="media">
+					<div class="media-left">
+						<a href="#">
+	<img src="{{m.image}}" class="rounded1" width=100/>
+	<p></p>
+						</a>
+					</div>
+					<div class="media-body">
+						<div class="col col-md-auto"> 
+	<h3><a href="/artist/{{m.artistId}}" name = "clicked">{{m.name}}</a></h3>
+	</div>
+					</div>
+				</div>
+			</div>
+	{% endif %}
+	{% endfor %}
+	{% endif %}
+</body>
+</html>
+
+{% endblock %}
