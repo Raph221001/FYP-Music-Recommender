@@ -97,12 +97,6 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
- #   'default': {
-  #      'ENGINE': 'django.db.backends.sqlite3',
-   #     'NAME': BASE_DIR / 'db.sqlite3',
-    #}
-#}
 
 DATABASES = {
     'default': {
@@ -172,11 +166,5 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
-
-EMAIL_BACKEND = 'django_ses.SESBackend'
-AWS_ACCESS_KEY_ID = 'AKIAVINMPP5MI5HB6AZY'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_SES_REGION_NAME = 'eu-west-1 '
-AWS_SES_REGION_ENDPOINT ='email.eu-west-1 .amazonaws.com'
 
 #WSGI_APPLICATION = 'djangoProject.wsgi.application'

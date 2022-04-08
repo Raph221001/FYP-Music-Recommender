@@ -469,14 +469,12 @@ def video(request):
         for result in results:
             video_ids.append(result['id']['videoId'])
 
-        if request.POST['submit'] == 'lucky':
-            return redirect(f'https://www.youtube.com/watch?v={video_ids[0]}')
 
         video_params = {
             'key': settings.YOUTUBE_KEY,
             'part': 'snippet,contentDetails',
             'id': ','.join(video_ids),
-            'maxResults': 9
+            'maxResults': 3
         }
 
         r = requests.get(video_url, params=video_params)
