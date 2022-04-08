@@ -1,4 +1,4 @@
-# FYP-Music-Recommender
+# UI-Music-WebAppp
 
 ## How to run the Project
 
