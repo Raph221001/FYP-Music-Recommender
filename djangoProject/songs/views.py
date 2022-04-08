@@ -5,10 +5,8 @@ from .models import Song, Album, Artist, SongReview, AlbumReview, ArtistReview
 from django.db.models import Avg
 import unicodedata
 import spotipy
-import spotipy.util as util
 import spotipy.oauth2 as oauth2
 import requests
-#import googleapis
 from isodate import parse_duration
 from django.conf import settings
 
