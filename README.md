@@ -1,4 +1,4 @@
-# UI-Music-WebAppp
+# UI-Music-WebApp
 
 ## How to run the Project
 
